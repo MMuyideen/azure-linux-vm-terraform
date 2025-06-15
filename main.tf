@@ -16,14 +16,14 @@ resource "azurerm_subnet" "linus" {
   virtual_network_name = azurerm_virtual_network.linus.name
   address_prefixes     = ["10.0.2.0/24"]
 
-  
+
 }
 
 resource "azurerm_network_security_group" "linus" {
-  name = "linus-sub-nsg"
+  name                = "linus-sub-nsg"
   resource_group_name = azurerm_resource_group.linus.name
-  location = azurerm_resource_group.linus.location
-  
+  location            = azurerm_resource_group.linus.location
+
   security_rule {
     name                       = "ssh"
     priority                   = 100
@@ -36,25 +36,13 @@ resource "azurerm_network_security_group" "linus" {
     destination_address_prefix = "*"
   }
 
-  security_rule {
-    name                       = "jenkins"
-    priority                   = 101
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "8080"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
 
-  
 }
 
 resource "azurerm_subnet_network_security_group_association" "linus" {
-    network_security_group_id = azurerm_network_security_group.linus.id
-    subnet_id = azurerm_subnet.linus.id
-  
+  network_security_group_id = azurerm_network_security_group.linus.id
+  subnet_id                 = azurerm_subnet.linus.id
+
 }
 
 resource "azurerm_public_ip" "linus" {
@@ -88,10 +76,8 @@ resource "azurerm_linux_virtual_machine" "linus" {
     azurerm_network_interface.linus.id,
   ]
 
-  admin_ssh_key {
-    username   = "linus"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
+  admin_password                  = var.admin_password
+  disable_password_authentication = false
 
   os_disk {
     caching              = "ReadWrite"
