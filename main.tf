@@ -36,6 +36,30 @@ resource "azurerm_network_security_group" "linus" {
     destination_address_prefix = "*"
   }
 
+  security_rule {
+    name                       = "http"
+    priority                   = 200
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "https"
+    priority                   = 300
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
 
 }
 
@@ -82,6 +106,7 @@ resource "azurerm_linux_virtual_machine" "linus" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
+    name                 = "linus-os-disk"
   }
 
   source_image_reference {
