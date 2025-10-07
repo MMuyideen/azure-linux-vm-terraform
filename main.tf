@@ -94,7 +94,7 @@ resource "azurerm_linux_virtual_machine" "linus" {
   name                = "linus-vm"
   resource_group_name = azurerm_resource_group.linus.name
   location            = azurerm_resource_group.linus.location
-  size                = "Standard_B1s"
+  size                = "Standard_B4ms" 
   admin_username      = "linus"
   network_interface_ids = [
     azurerm_network_interface.linus.id,
