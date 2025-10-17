@@ -44,7 +44,7 @@ terraform init
 
 ```sh
 terraform plan
-terraform apply
+terraform apply -auto-approve
 ```
 
 ### 4. Destroy Resources
@@ -52,7 +52,7 @@ terraform apply
 To remove all resources created by Terraform:
 
 ```sh
-terraform destroy
+terraform destroy -auto-approve
 ```
 
 ### 5. Delete Backend Storage (Optional)
