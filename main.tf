@@ -60,6 +60,18 @@ resource "azurerm_network_security_group" "linus" {
     destination_address_prefix = "*"
   }
 
+  security_rule {
+    name                       = "RDP"
+    priority                   = 400
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
 
 }
 
@@ -90,6 +102,7 @@ resource "azurerm_network_interface" "linus" {
   }
 }
 
+# Create Linux VM
 resource "azurerm_linux_virtual_machine" "linus" {
   name                = "linus-vm"
   resource_group_name = azurerm_resource_group.linus.name
@@ -115,4 +128,21 @@ resource "azurerm_linux_virtual_machine" "linus" {
     sku       = "ubuntu-pro"
     version   = "latest"
   }
+}
+
+# Add custom script for RDP
+resource "azurerm_virtual_machine_extension" "script" {
+  name                 = "CustomScriptExtension"
+  virtual_machine_id   = azurerm_linux_virtual_machine.linus.id
+  publisher            = "Microsoft.Azure.Extensions"
+  type                 = "CustomScript"
+  type_handler_version = "2.1"
+
+  settings = <<SETTINGS
+    {
+        "fileUris": ["https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-custom-script-linux/scripts/install-xrdp.sh"],
+        "commandToExecute": "bash install-xrdp.sh"
+    }
+  SETTINGS
+
 }

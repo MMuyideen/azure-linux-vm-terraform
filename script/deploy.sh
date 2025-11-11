@@ -29,3 +29,8 @@ az storage container create \
     --account-key $ACCOUNT_KEY
 
 echo "Resource group, storage account, and container created."
+
+# Create Terraform Resources
+
+terraform init -upgrade
+terraform apply -auto-approve
