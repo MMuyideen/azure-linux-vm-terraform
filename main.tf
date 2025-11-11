@@ -140,8 +140,8 @@ resource "azurerm_virtual_machine_extension" "script" {
 
   settings = <<SETTINGS
     {
-        "fileUris": ["https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-custom-script-linux/scripts/install-xrdp.sh"],
-        "commandToExecute": "bash install-xrdp.sh"
+        "fileUris": ["https://raw.githubusercontent.com/MMuyideen/azure-linux-vm-terraform/refs/heads/main/script/rdp.sh"],
+        "commandToExecute": "bash rdp.sh"
     }
   SETTINGS
 

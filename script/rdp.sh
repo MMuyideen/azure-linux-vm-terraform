@@ -19,7 +19,7 @@ sudo systemctl restart xrdp
 # If you have a firewall or cloud security group, allow TCP port 3389.
 # For cloud platforms (Azure, AWS, etc.), update network security group or firewall rules.
  
-# For UFW:
-sudo ufw allow 3389/tcp
+# For UFW (Uncomplicated Firewall) on Ubuntu, uncomment the line below:
+# sudo ufw allow 3389/tcp
 
  
