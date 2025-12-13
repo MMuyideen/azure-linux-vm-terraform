@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "linus" {
   location = "West US"
 }
 
-# create Virtual Network
+# Create Virtual Network
 resource "azurerm_virtual_network" "linus" {
   name                = "linus-vnet"
   address_space       = ["10.0.0.0/16"]
@@ -102,7 +102,7 @@ resource "azurerm_linux_virtual_machine" "linus" {
   }
 }
 
-# Add custom script for RDP
+# Add custom script for RDP access (Optional)
 resource "azurerm_virtual_machine_extension" "script" {
   name                 = "CustomScriptExtension"
   virtual_machine_id   = azurerm_linux_virtual_machine.linus.id
