@@ -22,7 +22,7 @@ resource "azurerm_subnet" "linus" {
 
 }
 
-# Create Network Security Group
+# Create Network Security Group and rules
 resource "azurerm_network_security_group" "linus" {
   name                = "linus-sub-nsg"
   resource_group_name = azurerm_resource_group.linus.name
