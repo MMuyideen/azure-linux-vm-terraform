@@ -3,6 +3,6 @@ output "vm_public_ip" {
   value       = azurerm_public_ip.linus.ip_address
 }
 
-output "SSh_Command" {
+output "SSH_Command" {
   value = "ssh ${azurerm_linux_virtual_machine.linus.admin_username}@${azurerm_public_ip.linus.ip_address}"
 }
