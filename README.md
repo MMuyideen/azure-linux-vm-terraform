@@ -47,7 +47,7 @@ What `deploy.sh` does (summary):
 
 If you prefer to manage the backend manually, update `backend.tf` with the correct `resource_group_name`, `storage_account_name`, and `container_name` before running `terraform init` and the scripts.
 
-Destroying the resources
+### Destroying the resources
 
 The repository also includes a convenience script to destroy the stack and remove backend resources. The script will run Terraform destroy and then delete the backend resource group created by `deploy.sh`.
 
@@ -88,11 +88,6 @@ All variables are declared in `variable.tf`.
 - If `terraform init` fails because the backend settings are missing, edit `backend.tf` and populate `resource_group_name`, `storage_account_name`, and `container_name` with the values created by `script/deploy.sh`.
 - If the custom script extension fails on the VM, check the VM extension status in the Azure portal and review the extension logs under `/var/log/azure` on the VM.
 
-## Tips / Next steps
-
-- Switch to SSH public-key authentication for the VM (`azurerm_linux_virtual_machine` supports `admin_ssh_key`).
-- Consider parameterizing image SKU and size to make the module reusable.
-- Add automated tests or a small CI job to run `terraform validate` and `terraform fmt`.
 
 ## License
 
