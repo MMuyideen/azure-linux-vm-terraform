@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout current repository
         uses: actions/checkout@v4
+        with:
+            path: main-repo
 
       - name: Checkout second repository
         uses: actions/checkout@v4
