@@ -20,18 +20,9 @@ jobs:
       - name: Checkout second repository
         uses: actions/checkout@v4
         with:
-          repository: mmuyi/second-repo
-          path: second-repo
-          token: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
-
-      - name: Checkout third repository
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository_owner }}/third-repo
-          path: third-repo
-          token: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
+          repository: mmuyideen/ghaction
+          path: gh
+     
 
       - name: List main repository contents
         run: |
@@ -41,17 +32,8 @@ jobs:
       - name: List second repository contents
         run: |
           echo "=== Second Repository Contents ==="
-          if [ -d "second-repo" ]; then
-            ls -la second-repo/
-          else
-            echo "Repository not available"
-          fi
-
-      - name: List third repository contents
-        run: |
-          echo "=== Third Repository Contents ==="
-          if [ -d "third-repo" ]; then
-            ls -la third-repo/
+          if [ -d "gh" ]; then
+            ls -la gh/
           else
             echo "Repository not available"
           fi
