@@ -27,22 +27,5 @@ jobs:
       - name: List main repository contents
         run: |
           echo "=== Main Repository Contents ==="
-          ls -la main-repo/
+          ls -la {{ github.workspace }}
 
-      - name: List second repository contents
-        run: |
-          echo "=== Second Repository Contents ==="
-          if [ -d "gh" ]; then
-            ls -la gh/
-          else
-            echo "Repository not available"
-          fi
-
-      - name: List all repositories summary
-        run: |
-          echo "=== All Repositories Summary ==="
-          echo "Workspace contents:"
-          ls -la
-          echo ""
-          echo "Recursive listing of all checked out repos:"
-          find . -maxdepth 2 -type f | head -50
