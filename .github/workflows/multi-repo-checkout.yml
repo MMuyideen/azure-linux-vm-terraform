@@ -1,0 +1,66 @@
+name: Multi-Repository Checkout
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - feature/*
+
+jobs:
+  checkout-and-list:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          path: main-repo
+
+      - name: Checkout second repository
+        uses: actions/checkout@v4
+        with:
+          repository: mmuyi/second-repo
+          path: second-repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: Checkout third repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/third-repo
+          path: third-repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: List main repository contents
+        run: |
+          echo "=== Main Repository Contents ==="
+          ls -la main-repo/
+
+      - name: List second repository contents
+        run: |
+          echo "=== Second Repository Contents ==="
+          if [ -d "second-repo" ]; then
+            ls -la second-repo/
+          else
+            echo "Repository not available"
+          fi
+
+      - name: List third repository contents
+        run: |
+          echo "=== Third Repository Contents ==="
+          if [ -d "third-repo" ]; then
+            ls -la third-repo/
+          else
+            echo "Repository not available"
+          fi
+
+      - name: List all repositories summary
+        run: |
+          echo "=== All Repositories Summary ==="
+          echo "Workspace contents:"
+          ls -la
+          echo ""
+          echo "Recursive listing of all checked out repos:"
+          find . -maxdepth 2 -type f | head -50
