@@ -12,18 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout current repository
-        uses: actions/checkout@v4
-        with:
-            path: main-repo
-
-      - name: Checkout second repository
-        uses: actions/checkout@v4
-        with:
-          repository: mmuyideen/ghaction
-          path: gh
-     
-
       - name: List main repository contents
         run: |
           echo ${{ github.workspace }}
