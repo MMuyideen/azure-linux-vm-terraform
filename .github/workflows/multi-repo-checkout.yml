@@ -24,7 +24,7 @@ jobs:
 
       - name: List main repository contents
         run: |
-          echo "=== Main Repository Contents ==="
+          echo ${{ github.workspace }}
           ls -lR ${{ github.workspace }}
           
 
